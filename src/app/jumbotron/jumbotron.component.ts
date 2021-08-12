@@ -15,7 +15,7 @@ export class JumbotronComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-        title: ''
+        title: new FormControl('')
     });
   }
 

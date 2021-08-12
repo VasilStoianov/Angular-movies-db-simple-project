@@ -1,11 +1,10 @@
 import {Movie} from 'src/app/interfaces/movie';
 import {ActivatedRoute, Router} from '@angular/router';
-import { MovieService } from './../../Services/movie.service';
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {IAppState} from '../state/app.state';
 import {searchedMoviesList} from '../selectors/movies-selectors';
-import {SearchMovies} from '../actions/movies-action';
+import * as actions from '../actions/movies-action';
 
 @Component({
   selector: 'app-search-movies',
@@ -13,15 +12,25 @@ import {SearchMovies} from '../actions/movies-action';
   styleUrls: ['./search-movies.component.css']
 })
 export class SearchMoviesComponent implements OnInit {
+  searchedMovies: Movie[];
 
-  users$ = this.store.pipe(select(searchedMoviesList));
+  searchTitle: string;
+  constructor(private store: Store<IAppState>, private router: Router, private acR: ActivatedRoute) {
+  this.searchTitle = this.acR.snapshot.queryParams['id'];
 
-  constructor(private store: Store<IAppState>, private router: Router, private acR: ActivatedRoute) {}
+  }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    console.log(this.acR.snapshot.queryParams);
-   // this.store.dispatch(new SearchMovies(this.acR.snapshot.queryParams.get('')));
+    if (this.searchTitle && this.searchTitle !== '') {
+      this.store.dispatch(new actions.SearchMovies(this.searchTitle));
+    }
+
+    this.store.pipe(select(searchedMoviesList)).subscribe(data => {
+      if (data){
+        this.searchedMovies = data;
+      }
+    });
   }
 
 

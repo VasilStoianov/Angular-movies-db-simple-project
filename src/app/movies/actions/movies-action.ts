@@ -2,14 +2,14 @@ import {Action} from '@ngrx/store';
 import {Movie} from '../../interfaces/movie';
 
 
-export enum EMovieAction{
+export enum EMovieAction {
   SearchMovies = '[Movie] Search movies',
   SearchMoviesSuccess = '[Movie] Search movies success'
 }
 
 export class SearchMovies implements Action{
   public readonly type = EMovieAction.SearchMovies;
-  constructor(public filter: string) {
+  constructor(public filter: string) {console.log(filter);
   }
 }
 

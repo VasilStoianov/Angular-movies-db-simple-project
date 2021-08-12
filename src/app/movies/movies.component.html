@@ -1,15 +1,18 @@
+<!--
 <p>Popular Movies</p>
 <div class="row moviesClass">
   <div class="col-lg-2" *ngFor="let movie of movies">
-    <app-movie [movie]=movie></app-movie>
+    {{movie | json}}
+    <app-movie [movie]="movie"></app-movie>
   </div>
 </div>
-
+-->
 <p>In theather</p>
 <div class="row moviesClass">
   <div class="col-lg-2" *ngFor="let movie of theather">
-    <app-movie [movie]=movie (myCustomEvent) = "buttonFromChild($event)"></app-movie>
+    <app-movie [movie]="movie"></app-movie>
   </div>
 </div>
 
-<div *ngIf="message">{{message}} has been clicked</div>
+
+

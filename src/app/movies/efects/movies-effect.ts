@@ -4,10 +4,10 @@ import { map, switchMap } from 'rxjs/operators';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {EMovieAction, SearchMovies, SearchMoviesSuccess} from '../actions/movies-action';
 import {of} from 'rxjs';
+import {Movie} from '../../interfaces/movie';
 
 
-@Injectable
-({providedIn: 'root'})
+@Injectable()
 // @ts-ignore
 export class MoviesEffect{
   constructor(private actions$: Actions, private movieService: MovieService){}
@@ -17,9 +17,10 @@ export class MoviesEffect{
     // @ts-ignore
   searchMovies$ = this.actions$.pipe(
     ofType<SearchMovies>(EMovieAction.SearchMovies),
-    switchMap(action => this.movieService.searchMovie(action.filter).pipe(
+    switchMap(({filter}) => this.movieService.searchMovie(filter).pipe(
       map(data => {
-        return of(new SearchMoviesSuccess(data));
+        const payload: Movie[] = data['results'];
+        return new SearchMoviesSuccess(payload);
       })
     )
   ));

@@ -5,8 +5,10 @@ export interface Movie {
  release_date: string;
 }
 
+/*
 export interface Movies{
       movies: Movies[];
 }
+*/
 
 

@@ -13,29 +13,19 @@ import {Movie} from '../interfaces/movie';
 export class MoviesComponent implements OnInit {
   movies: Movie[];
   theather: Movie[];
-  message: string = null;
-  searchedMovies: Movie[];
   constructor(private movieService: MovieService, private actRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-      console.log(this.actRoute.snapshot.queryParams.id);
-
-
-
+     // console.log(this.actRoute.snapshot.queryParams.id);
       this.movieService.getPopularMovies().subscribe(data => {
-      this.movies = data.slice(0, 6);
+        this.movies = data['results'];
     });
 
       this.movieService.getInTheather().subscribe(data => {
-      this.theather = data.slice(0, 6);
+      this.theather = data['results'];
+
     });
   }
 
-  // tslint:disable-next-line:typedef
-  buttonFromChild(event){
-    console.log(event);
-    this.message = event;
-    console.log(this.message);
-    }
 
 }

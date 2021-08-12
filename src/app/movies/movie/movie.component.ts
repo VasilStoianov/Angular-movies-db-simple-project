@@ -1,8 +1,9 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Movie}  from 'src/app/interfaces/movie';
+// tslint:disable-next-line:import-spacing
+import {Movie} from 'src/app/interfaces/movie';
 
-const IMG_PATH: string = 'https://image.tmdb.org/t/p/w500/'
+const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
@@ -13,16 +14,13 @@ export class MovieComponent implements OnInit {
  @Output() myCustomEvent = new EventEmitter();
 
   @Input('movie')movie: Movie;
+  poster: string;
   constructor() { }
 
   ngOnInit(): void {
-    this.movie.poster_path = IMG_PATH + this.movie.poster_path;
+    this.poster = IMG_PATH + this.movie.poster_path;
+
+
   }
-
-  movieId(){
-   this.myCustomEvent.emit(this.movie.id);
-  }
-
-
 
 }
