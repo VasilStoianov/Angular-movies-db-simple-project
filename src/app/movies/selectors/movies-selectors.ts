@@ -13,3 +13,11 @@ export const movieDetails = createSelector(
   searchedMovies,
   (state: MovieState) => state.movieDetails
 );
+
+export const getPopularList = createSelector(
+  searchedMovies, (state: MovieState) => state.movies
+);
+
+export const getInTheatherList = createSelector(
+  searchedMovies, (state: MovieState) => state.movies
+);

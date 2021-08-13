@@ -26,6 +26,20 @@ export const movieReducer = (
        initialMovieState
 
     }
+
+    case EMovieAction.GetInTheatherSuccess: {
+      return{
+        ...state,
+        movies: action.payload
+      }
+    }
+
+    case EMovieAction.GetPopularrSuccess: {
+      return{
+        ...state,
+        movies: action.payload
+      }
+    }
     default:
         return state;
   }

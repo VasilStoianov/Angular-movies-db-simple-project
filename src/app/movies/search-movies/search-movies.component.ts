@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs';
 import {Movie} from 'src/app/interfaces/movie';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {IAppState} from '../state/app.state';
 import {searchedMoviesList} from '../selectors/movies-selectors';
@@ -11,8 +12,9 @@ import * as actions from '../actions/movies-action';
   templateUrl: './search-movies.component.html',
   styleUrls: ['./search-movies.component.css']
 })
-export class SearchMoviesComponent implements OnInit {
+export class SearchMoviesComponent implements OnInit,OnDestroy {
   searchedMovies: Movie[];
+  searcheMoviesSub$: Subscription;
 
   searchTitle: string;
   constructor(private store: Store<IAppState>, private router: Router, private acR: ActivatedRoute) {
@@ -26,13 +28,15 @@ export class SearchMoviesComponent implements OnInit {
       this.store.dispatch(new actions.SearchMovies(this.searchTitle));
     }
 
-    this.store.pipe(select(searchedMoviesList)).subscribe(data => {
+    this.searcheMoviesSub$ = this.store.pipe(select(searchedMoviesList)).subscribe(data => {
       if (data){
         this.searchedMovies = data;
       }
     });
   }
-
+ngOnDestroy(){
+  this.searcheMoviesSub$.unsubscribe();
+}
 
 
 }

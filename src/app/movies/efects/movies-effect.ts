@@ -1,4 +1,4 @@
-import { GetMovieDetails, GetMovieDetailsSuccess } from './../actions/movies-action';
+import { GetMovieDetails, GetMovieDetailsSuccess, GetInTheatherSuccess, GetPopular, GetPopularrSuccess, GetInTheather } from './../actions/movies-action';
 import { MovieService } from './../../Services/movie.service';
 import { Injectable } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
@@ -37,6 +37,29 @@ getMovieDetails$ = this.actions$.pipe(
     })
   )
 ));
+@Effect()
+    // @ts-ignore
+  getInTheather$ = this.actions$.pipe(
+    ofType<GetInTheather>(EMovieAction.GetInTheather),
+    switchMap(() => this.movieService.getInTheather().pipe(
+      map(data => {
+        const payload: Movie[] = data['results'];
+        return new GetInTheatherSuccess(payload);
+      })
+    )
+  ));
+
+  @Effect()
+    // @ts-ignore
+  getPopular$ = this.actions$.pipe(
+    ofType<GetPopular>(EMovieAction.GetPopular),
+    switchMap(() => this.movieService.getPopularMovies().pipe(
+      map(data => {
+        const payload: Movie[] = data['results'];
+        return new GetPopularrSuccess(payload);
+      })
+    )
+  ));
 
 }
 
