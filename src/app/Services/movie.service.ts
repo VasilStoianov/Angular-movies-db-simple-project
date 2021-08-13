@@ -29,6 +29,10 @@ export class MovieService {
     return this.http.get<Movie[]>('https://api.themoviedb.org/3/search/movie?api_key=151398c6a95895cf859a8a939b817ce7&query=' + id)
   }
 
+  getMovieDetails(id: string){
+    return this.http.get<Movie>('https://api.themoviedb.org/3/movie/' + id + '?api_key=151398c6a95895cf859a8a939b817ce7');
+  }
+
 
 
 

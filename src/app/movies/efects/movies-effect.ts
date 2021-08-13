@@ -1,3 +1,4 @@
+import { GetMovieDetails, GetMovieDetailsSuccess } from './../actions/movies-action';
 import { MovieService } from './../../Services/movie.service';
 import { Injectable } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
@@ -25,16 +26,17 @@ export class MoviesEffect{
     )
   ));
 
-/*
+  @Effect()
   // @ts-ignore
-  @Effect() getOutOfOfficeInfo$ = this.actions$.pipe(
-    ofType(fromActions.getMovies),
-    switchMap((action) =>
-      this.movieService.searchMovie(action.sort).pipe(
-        map( data => {
-          // @ts-ignore
-          return new fromActions.getMoviesSuccess(data);
-        }))));*/
+getMovieDetails$ = this.actions$.pipe(
+  ofType<GetMovieDetails>(EMovieAction.GetMovieDetails),
+  switchMap(({id}) => this.movieService.getMovieDetails(id).pipe(
+    map(data => {
+      const payload: Movie = data;
+      return new GetMovieDetailsSuccess(payload);
+    })
+  )
+));
 
 }
 

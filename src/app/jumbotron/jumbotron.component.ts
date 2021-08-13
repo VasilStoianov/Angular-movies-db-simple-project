@@ -22,6 +22,6 @@ export class JumbotronComponent implements OnInit {
   // tslint:disable-next-line:typedef
   searchForMovie(){
 
-    this.router.navigate(['default/searchMovie'], { queryParams: {id: this.searchForm.controls.title.value }});
+    this.router.navigate(['movies/searchMovie'], { queryParams: {id: this.searchForm.controls.title.value }});
    }
 }

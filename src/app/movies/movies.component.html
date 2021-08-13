@@ -1,13 +1,12 @@
-<!--
-<p>Popular Movies</p>
+
+<h1>Popular Movies</h1>
 <div class="row moviesClass">
   <div class="col-lg-2" *ngFor="let movie of movies">
-    {{movie | json}}
     <app-movie [movie]="movie"></app-movie>
   </div>
 </div>
--->
-<p>In theather</p>
+
+<h1>In theather</h1>
 <div class="row moviesClass">
   <div class="col-lg-2" *ngFor="let movie of theather">
     <app-movie [movie]="movie"></app-movie>

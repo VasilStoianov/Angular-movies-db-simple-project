@@ -13,6 +13,8 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {environment} from '../../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {MovieService} from '../Services/movie.service';
+import { MoviesDetailsComponent } from './movies-details/movies-details.component';
+import { NgbdModalContent } from './movies-details/movies-modal/movies-modal';
 
 
 
@@ -20,12 +22,13 @@ import {MovieService} from '../Services/movie.service';
   declarations: [
     MoviesComponent,
     SearchMoviesComponent,
-    MovieComponent
+    MovieComponent,
+    MoviesDetailsComponent,
+    NgbdModalContent
   ],
   imports: [
     CommonModule,
     EffectsModule,
-    StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([MoviesEffect]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     routing

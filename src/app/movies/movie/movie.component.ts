@@ -11,7 +11,7 @@ const IMG_PATH = 'https://image.tmdb.org/t/p/w500'
 })
 export class MovieComponent implements OnInit {
 
- @Output() myCustomEvent = new EventEmitter();
+ @Output() movieIdEmitter = new EventEmitter();
 
   @Input('movie')movie: Movie;
   poster: string;
@@ -19,8 +19,9 @@ export class MovieComponent implements OnInit {
 
   ngOnInit(): void {
     this.poster = IMG_PATH + this.movie.poster_path;
-
-
+  }
+  showMoviesDetails(){
+    this.movieIdEmitter.emit(this.movie.id);
   }
 
 }

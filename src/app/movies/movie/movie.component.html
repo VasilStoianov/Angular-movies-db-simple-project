@@ -1,11 +1,11 @@
 <div class="card mb-3 card ">
-  <img style="height: 200px; width: 75%; display: block" [src]="poster" alt="Card ">
+  <img style="height: 250px; width: 75%; display: block" [src]="poster" alt="Card ">
   <div class="card-body">
     <p class="card-text">{{movie.title}}</p>
   </div>
-  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+  <h6 class="card-subtitle mb-2 text-muted">'{{movie.overview | slice:0:35}}'...</h6>
   <div class="card-footer text-muted">
-    <div class="btn btn-primary">View details</div>
+<app-movies-modal [movieId]=movie.id></app-movies-modal>
   </div>
 </div>
 

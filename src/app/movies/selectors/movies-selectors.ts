@@ -8,3 +8,8 @@ const searchedMovies = (state: IAppState) => state.movies;
 export const searchedMoviesList = createSelector(
   searchedMovies, (state: MovieState) => state.movies
 );
+
+export const movieDetails = createSelector(
+  searchedMovies,
+  (state: MovieState) => state.movieDetails
+);
